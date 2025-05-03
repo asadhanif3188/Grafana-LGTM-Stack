@@ -1,6 +1,24 @@
-# Actual values.yaml file: https://github.com/grafana/loki/blob/main/production/helm/loki/values.yaml
+# Grafana LGTM (Loki Grafana Tempo Mimir) Stack
 
+## Grafana Loki
 
+### Deploying the Helm chart for development and testing
+
+**Step 1:** Add Grafana’s chart repository to Helm:
+
+```
+helm repo add grafana https://grafana.github.io/helm-charts
+```
+
+**Step 2:** Update the chart repository:
+
+```
+helm repo update
+```
+
+**Step 3:** Create the configuration file `values-loki.yaml`.
+
+```
 loki:
   auth_enabled: false
   commonConfig:
@@ -14,8 +32,8 @@ loki:
     s3:
       endpoint: http://minio-local:9001
       region: us-east-1
-      secretAccessKey: miYXleYCSzl3qWj1353irgpyo26cOxJYQdbna89O
-      accessKeyId: Tmsk4rWGFFUgusyk1vym
+      secretAccessKey: <secretAccessKey of Minio>
+      accessKeyId: <accessKeyId of Minio>
       s3ForcePathStyle: true
       insecure: true
 
@@ -46,7 +64,6 @@ backend:
   persistence:
     storageClass: standard
 
-
-
+```
 
 
