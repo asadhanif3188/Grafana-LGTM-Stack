@@ -6,6 +6,35 @@ loki:
   commonConfig:
     replication_factor: 1
 
+  storage:
+    bucketNames:
+      chunks: loki-chunks
+      ruler: loki-ruler
+    type: s3
+    s3:
+      endpoint: http://minio-local:9001
+      region: us-east-1
+      secretAccessKey: miYXleYCSzl3qWj1353irgpyo26cOxJYQdbna89O
+      accessKeyId: Tmsk4rWGFFUgusyk1vym
+      s3ForcePathStyle: true
+      insecure: true
+
+  memcached:
+    chunk_cache:
+      enabled: false
+
+
+  schemaConfig:
+    configs:
+      - from: 2024-04-01
+        store: tsdb
+        object_store: s3
+        schema: v13
+        index:
+          prefix: index_
+          period: 24h
+        chunks:
+          period: 24h
 
 read:
   replicas: 1
@@ -21,5 +50,8 @@ backend:
   replicas: 1
   persistence:
     storageClass: standard
+
+
+
 
 
